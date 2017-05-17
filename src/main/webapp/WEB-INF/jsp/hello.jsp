@@ -11,6 +11,6 @@
     <title>hello</title>
 </head>
 <body>
-<h1>现在时间：${currentTime}</h1>
+<h1>现在时间：<%=request.getAttribute("currentTime")%></h1>
 </body>
 </html>
