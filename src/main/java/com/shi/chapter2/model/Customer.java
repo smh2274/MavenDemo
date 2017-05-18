@@ -4,8 +4,8 @@ package com.shi.chapter2.model;
  * Created by Bran-Shi on 5/17/2017.
  */
 
-/**客户
- *
+/**
+ * 客户
  */
 public class Customer {
     /**
@@ -59,14 +59,17 @@ public class Customer {
     }
 
     public void setContact(String contact) {
+
         this.contact = contact;
     }
 
     public String getTelephone() {
+
         return telephone;
     }
 
     public void setTelephone(String telephone) {
+
         this.telephone = telephone;
     }
 
