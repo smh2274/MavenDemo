@@ -8,15 +8,29 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Bran-Shi on 5/17/2017.
- *
+ * Created by Bran-Shi on 5/18/2017.
+ * 删除客户
  */
-@WebServlet( name="CustomerServlet",value = "/CustomerServlet")
-public class CustomerServlet extends HttpServlet {
+@WebServlet(name = "CustomerDeleteServlet",value = "/CustomerDeleteServlet")
+public class CustomerDeleteServlet extends HttpServlet {
+    /**
+     * 删除客户
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
+    /**
+     * 进入删除客户页面
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }

@@ -14,7 +14,7 @@ import java.util.Date;
  * Created by Bran-Shi on 5/17/2017.
  *
  */
-@WebServlet("/hello")
+@WebServlet(name="HelloServlet",value = "/HelloServlet")
 public class HelloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request,response);
