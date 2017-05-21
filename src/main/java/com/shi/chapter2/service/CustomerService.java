@@ -1,13 +1,15 @@
 package com.shi.chapter2.service;
 
+import com.shi.chapter2.helper.DatabaseHelper;
 import com.shi.chapter2.model.Customer;
-import com.shi.chapter2.util.PropsUtil;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import static com.shi.chapter2.util.PropsUtil.LOGGER;
 
@@ -18,7 +20,7 @@ import static com.shi.chapter2.util.PropsUtil.LOGGER;
  */
 
 public class CustomerService {
-    private static final String DRIVER;
+/*    private static final String DRIVER;
     private static final String URL;
     private static final String USERNAME;
     private static final String PASSWORD;
@@ -35,20 +37,23 @@ public class CustomerService {
             LOGGER.error("can not load jdbc driver");
         }
     }
+*/
 
     /**
      * 获取客户列表
      */
 
-    public List<Customer> getCustomerList(String keyword) {
+    public List<Customer> getCustomerList() {
         Connection conn = null;
         List<Customer> customerList = new ArrayList<Customer>();
         try {
             String sql = "select * from customer";
-            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            // conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+            conn = DatabaseHelper.getconnect();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()) {
+            while (rs.next()) {
                 Customer customer = new Customer();
                 customer.setId(rs.getLong("id"));
                 customer.setName(rs.getString("name"));
@@ -58,19 +63,28 @@ public class CustomerService {
                 customer.setRemark(rs.getString("remark"));
                 customerList.add(customer);
             }
+
+            //return DatabaseHelper.queryEntityList(Customer.class,sql,conn);
         } catch (SQLException e) {
             e.printStackTrace();
             LOGGER.error("execute sql failure");
         } finally {
-            if (conn != null) {
+            /*if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException e) {
                     LOGGER.error("close connect failure", e);
                 }
-            }
+            }*/
+            DatabaseHelper.closeConnect(conn);
         }
         return customerList;
+    }
+
+    public static void main(String[] args) {
+        CustomerService c = new CustomerService();
+        List<Customer> list= c.getCustomerList();
+        System.out.println(list.get(0).getContact());
     }
 
     /**
