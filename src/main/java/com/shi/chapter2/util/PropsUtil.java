@@ -13,7 +13,7 @@ import java.util.Properties;
  * 属性文件工具类
  */
 public final class PropsUtil {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(PropsUtil.class);
     /**
      * 加载属性文件
      */
