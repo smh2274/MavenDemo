@@ -80,13 +80,13 @@ public class CustomerService {
         }
         return customerList;
     }
-
+    /**测试
     public static void main(String[] args) {
         CustomerService c = new CustomerService();
         List<Customer> list= c.getCustomerList();
         System.out.println(list.get(0).getContact());
     }
-
+     */
     /**
      * 获取客户
      */
