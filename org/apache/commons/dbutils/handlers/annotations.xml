@@ -1,0 +1,5 @@
+<root>
+    <item name='org.apache.commons.dbutils.handlers.BeanListHandler'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>

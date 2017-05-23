@@ -3,15 +3,8 @@ package com.shi.chapter2.service;
 import com.shi.chapter2.helper.DatabaseHelper;
 import com.shi.chapter2.model.Customer;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static com.shi.chapter2.util.PropsUtil.LOGGER;
 
 
 /**
@@ -44,14 +37,14 @@ public class CustomerService {
      */
 
     public List<Customer> getCustomerList() {
-        Connection conn = null;
-        List<Customer> customerList = new ArrayList<Customer>();
-        try {
+        //Connection conn = null;
+        //List<Customer> customerList = new ArrayList<Customer>();
+       // try {
             String sql = "select * from customer";
             // conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            conn = DatabaseHelper.getconnect();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            //conn = DatabaseHelper.getconnect();
+            /*PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Customer customer = new Customer();
@@ -62,13 +55,12 @@ public class CustomerService {
                 customer.setEmail(rs.getString("email"));
                 customer.setRemark(rs.getString("remark"));
                 customerList.add(customer);
-            }
-
-            //return DatabaseHelper.queryEntityList(Customer.class,sql,conn);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            LOGGER.error("execute sql failure");
-        } finally {
+            }*/
+            return DatabaseHelper.queryEntityList(Customer.class,sql);
+     //   } /*catch (SQLException e) {
+         //   e.printStackTrace();
+           // LOGGER.error("execute sql failure");
+       // } *///finally {
             /*if (conn != null) {
                 try {
                     conn.close();
@@ -76,17 +68,17 @@ public class CustomerService {
                     LOGGER.error("close connect failure", e);
                 }
             }*/
-            DatabaseHelper.closeConnect(conn);
+            //DatabaseHelper.closeConnect();
         }
-        return customerList;
-    }
-    /**测试
+        //return customerList;
+  //  }
+
     public static void main(String[] args) {
         CustomerService c = new CustomerService();
         List<Customer> list= c.getCustomerList();
         System.out.println(list.get(0).getContact());
     }
-     */
+
     /**
      * 获取客户
      */
