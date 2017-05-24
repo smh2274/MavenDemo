@@ -72,7 +72,7 @@ public class CustomerService {
         }
         //return customerList;
   //  }
-
+/**测试
     public static void main(String[] args) {
         CustomerService c = new CustomerService();
         List<Customer> list= c.getCustomerList();
@@ -83,27 +83,28 @@ public class CustomerService {
      * 获取客户
      */
     public Customer getCustomer(long id) {
-        return null;
+        String sql="SELECT * FROM customer WHERE id="+id;
+        return DatabaseHelper.queryEntity(Customer.class,sql);
     }
 
     /**
      * 创建客户
      */
     public boolean createCustomer(Map<String, Object> filedMap) {
-        return false;
+        return DatabaseHelper.insertEntity(Customer.class,filedMap);
     }
 
     /**
      * 更新客户
      */
     public boolean updateCustomer(long id, Map<String, Object> filedMap) {
-        return false;
+        return DatabaseHelper.updateEntity(Customer.class,id,filedMap);
     }
 
     /**
      * 删除客户
      */
     public boolean deleteCustomer(long id) {
-        return false;
+        return DatabaseHelper.deleteEntity(Customer.class,id);
     }
 }
