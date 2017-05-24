@@ -84,7 +84,6 @@ public final class DatabaseHelper {
         List<T> entityList;
         try {
             Connection conn=getconnect();
-            //noinspection deprecation
             entityList = QUERY_RUNNER.query(conn, sql,new BeanListHandler<T>(entityClass),params);
         } catch (SQLException e) {
             LOGGER.error("query entity list failure", e);
@@ -93,6 +92,23 @@ public final class DatabaseHelper {
             closeConnect();
         }
         return entityList;
+    }
+
+    /**
+     * 查询实体
+     */
+    public static <T> T queryEntity(Class<T> entityClass,String sql,Object...params){
+        T entity;
+        try{
+            Connection conn=getconnect();
+            entity= (T) QUERY_RUNNER.query(conn,sql,new BeanListHandler<T>(entityClass),params);
+        }catch (SQLException e){
+            LOGGER.error("query entity failure",e);
+            throw new RuntimeException(e);
+        }finally {
+            closeConnect();
+        }
+        return entity;
     }
 
 }
