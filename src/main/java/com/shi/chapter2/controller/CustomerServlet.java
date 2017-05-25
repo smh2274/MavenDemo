@@ -1,11 +1,15 @@
 package com.shi.chapter2.controller;
 
+import com.shi.chapter2.model.Customer;
+import com.shi.chapter2.service.CustomerService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Bran-Shi on 5/17/2017.
@@ -13,11 +17,20 @@ import java.io.IOException;
  */
 @WebServlet( name="CustomerServlet",value = "/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private CustomerService customerService;
 
+    @Override
+    public void init() throws ServletException {
+        customerService=new CustomerService();
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doGet(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        List<Customer> customerList=customerService.getCustomerList();
+        request.setAttribute("customerList",customerList);
+        request.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(request,response);
     }
 }

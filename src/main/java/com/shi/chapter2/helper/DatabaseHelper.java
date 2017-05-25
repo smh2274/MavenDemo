@@ -28,6 +28,7 @@ public final class DatabaseHelper {
     private static final String URL;
     private static final String USERNAME;
     private static final String PASSWORD;
+    //private static final BasicDataSource DATA_SOURCE;
 
     private static final ThreadLocal<Connection> CONNECTION_THREAD_LOCAL = new ThreadLocal<Connection>();
 
@@ -37,7 +38,12 @@ public final class DatabaseHelper {
         URL = conf.getProperty("jdbc.url");
         USERNAME = conf.getProperty("jdbc.username");
         PASSWORD = conf.getProperty("jdbc.password");
-
+   /*
+        DATA_SOURCE=new BasicDataSource();
+        DATA_SOURCE.setDriverClassName(DRIVER);
+        DATA_SOURCE.setUrl(URL);
+        DATA_SOURCE.setUsername(USERNAME);
+        DATA_SOURCE.setPassword(PASSWORD);*/
         try {
             Class.forName(DRIVER);
         } catch (ClassNotFoundException e) {
@@ -52,6 +58,7 @@ public final class DatabaseHelper {
         Connection conn = CONNECTION_THREAD_LOCAL.get();
         if (conn == null) {
             try {
+                //conn=DATA_SOURCE.getConnection();
                 conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -74,9 +81,9 @@ public final class DatabaseHelper {
             } catch (SQLException e) {
                 //e.printStackTrace();
                 LOGGER.error("lose sql connection failure");
-            } finally {
+            } /*finally {
                 CONNECTION_THREAD_LOCAL.remove();
-            }
+            }dbcp所以不需要移除*/
         }
     }
 
